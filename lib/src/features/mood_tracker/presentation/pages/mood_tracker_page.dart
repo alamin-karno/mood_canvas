@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../auth/presentation/bloc/session_bloc.dart';
 import '../../domain/entities/mood_type.dart';
 import '../bloc/mood_tracker_bloc.dart';
 import '../bloc/mood_tracker_event.dart';
@@ -19,21 +18,6 @@ class MoodTrackerPage extends StatefulWidget {
 class _MoodTrackerPageState extends State<MoodTrackerPage> {
   String? _animatingEntryId;
 
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _subscribeHistory());
-  }
-
-  void _subscribeHistory() {
-    final userId = context.read<SessionBloc>().state.user?.id;
-    if (userId != null) {
-      context.read<MoodTrackerBloc>().add(
-            MoodTrackerHistorySubscriptionRequested(userId: userId),
-          );
-    }
-  }
-
   Future<void> _onTimelineTap(String entryId) async {
     setState(() => _animatingEntryId = entryId);
     await Future<void>.delayed(const Duration(milliseconds: 400));
@@ -42,21 +26,8 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
     }
   }
 
-  void _onMoodTap(MoodType mood, String userId) {
-    context.read<MoodTrackerBloc>().add(
-          MoodTrackerLogRequested(userId: userId, moodType: mood),
-        );
-  }
-
   @override
   Widget build(BuildContext context) {
-    final userId = context.watch<SessionBloc>().state.user?.id;
-    if (userId == null) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
-    }
-
     return BlocBuilder<MoodTrackerBloc, MoodTrackerState>(
       builder: (context, state) {
         final recent = state.history.take(7).toList();
@@ -92,7 +63,9 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
                           return GestureDetector(
                             onTap: logging
                                 ? null
-                                : () => _onMoodTap(type, userId),
+                                : () => context.read<MoodTrackerBloc>().add(
+                                      MoodTrackerLogRequested(type),
+                                    ),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [

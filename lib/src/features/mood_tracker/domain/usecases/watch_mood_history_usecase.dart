@@ -6,7 +6,7 @@ class WatchMoodHistoryUseCase {
 
   final MoodTrackerRepository _repository;
 
-  Stream<List<MoodEntry>> call({required String userId}) {
-    return _repository.watchMoodHistory(userId: userId);
+  Stream<List<MoodEntry>> call() {
+    return _repository.watchMoodHistory();
   }
 }

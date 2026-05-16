@@ -8,10 +8,7 @@ class LogMoodUseCase {
 
   final MoodTrackerRepository _repository;
 
-  FutureEither<MoodEntry> call({
-    required String userId,
-    required MoodEntry entry,
-  }) {
-    return _repository.logMood(userId: userId, entry: entry);
+  FutureEither<MoodEntry> call({required MoodEntry entry}) {
+    return _repository.logMood(entry: entry);
   }
 }

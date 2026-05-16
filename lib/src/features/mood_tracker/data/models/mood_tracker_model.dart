@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 import '../../domain/entities/mood_entry.dart';
 import '../../domain/entities/mood_type.dart';
 
@@ -14,21 +12,19 @@ class MoodTrackerModel {
   final String moodType;
   final DateTime createdAt;
 
-  factory MoodTrackerModel.fromFirestore(
-    DocumentSnapshot<Map<String, dynamic>> doc,
-  ) {
-    final data = doc.data() ?? {};
+  factory MoodTrackerModel.fromJson(Map<String, dynamic> json) {
     return MoodTrackerModel(
-      id: doc.id,
-      moodType: data['moodType'] as String? ?? MoodType.neutral.name,
-      createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
+      id: json['id'] as String,
+      moodType: json['moodType'] as String? ?? MoodType.neutral.name,
+      createdAt: DateTime.parse(json['createdAt'] as String),
     );
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'moodType': moodType,
-      'createdAt': Timestamp.fromDate(createdAt),
+      'createdAt': createdAt.toIso8601String(),
     };
   }
 

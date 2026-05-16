@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/entities/mood_entry.dart';
 import '../../domain/entities/mood_type.dart';
-import '../../domain/usecases/delete_mood_usecase.dart';
 import '../../domain/usecases/log_mood_usecase.dart';
 import '../../domain/usecases/watch_mood_history_usecase.dart';
 import 'mood_tracker_event.dart';
@@ -14,28 +13,20 @@ class MoodTrackerBloc extends Bloc<MoodTrackerEvent, MoodTrackerState> {
   MoodTrackerBloc({
     required LogMoodUseCase logMoodUseCase,
     required WatchMoodHistoryUseCase watchMoodHistoryUseCase,
-    required DeleteMoodUseCase deleteMoodUseCase,
   })  : _logMoodUseCase = logMoodUseCase,
         _watchMoodHistoryUseCase = watchMoodHistoryUseCase,
-        _deleteMoodUseCase = deleteMoodUseCase,
         super(const MoodTrackerState()) {
-    on<MoodTrackerHistorySubscriptionRequested>(
-      _onHistorySubscriptionRequested,
-    );
+    on<MoodTrackerStarted>(_onStarted);
     on<MoodTrackerHistoryUpdated>(_onHistoryUpdated);
-    on<MoodTrackerTypeSelected>(_onMoodTypeSelected);
     on<MoodTrackerLogRequested>(_onLogRequested);
-    on<MoodTrackerLogSubmitted>(_onLogSubmitted);
-    on<MoodTrackerDeleteRequested>(_onDeleteRequested);
   }
 
   final LogMoodUseCase _logMoodUseCase;
   final WatchMoodHistoryUseCase _watchMoodHistoryUseCase;
-  final DeleteMoodUseCase _deleteMoodUseCase;
   StreamSubscription<List<MoodEntry>>? _historySub;
 
-  Future<void> _onHistorySubscriptionRequested(
-    MoodTrackerHistorySubscriptionRequested event,
+  Future<void> _onStarted(
+    MoodTrackerStarted event,
     Emitter<MoodTrackerState> emit,
   ) async {
     emit(
@@ -45,7 +36,7 @@ class MoodTrackerBloc extends Bloc<MoodTrackerEvent, MoodTrackerState> {
       ),
     );
     await _historySub?.cancel();
-    _historySub = _watchMoodHistoryUseCase(userId: event.userId).listen(
+    _historySub = _watchMoodHistoryUseCase().listen(
       (entries) => add(MoodTrackerHistoryUpdated(entries)),
       onError: (_, __) => emit(
         state.copyWith(status: MoodTrackerStatus.failure),
@@ -65,53 +56,23 @@ class MoodTrackerBloc extends Bloc<MoodTrackerEvent, MoodTrackerState> {
     );
   }
 
-  void _onMoodTypeSelected(
-    MoodTrackerTypeSelected event,
-    Emitter<MoodTrackerState> emit,
-  ) {
-    emit(state.copyWith(selectedMood: event.moodType));
-  }
-
   Future<void> _onLogRequested(
     MoodTrackerLogRequested event,
     Emitter<MoodTrackerState> emit,
   ) async {
-    await _logMood(
-      userId: event.userId,
-      moodType: event.moodType,
-      emit: emit,
-    );
-  }
-
-  Future<void> _onLogSubmitted(
-    MoodTrackerLogSubmitted event,
-    Emitter<MoodTrackerState> emit,
-  ) async {
-    await _logMood(
-      userId: event.userId,
-      moodType: state.selectedMood,
-      emit: emit,
-    );
-  }
-
-  Future<void> _logMood({
-    required String userId,
-    required MoodType moodType,
-    required Emitter<MoodTrackerState> emit,
-  }) async {
     emit(
       state.copyWith(
         status: MoodTrackerStatus.logging,
-        selectedMood: moodType,
+        selectedMood: event.moodType,
         clearFailure: true,
       ),
     );
     final entry = MoodEntry(
       id: '',
-      moodType: moodType,
+      moodType: event.moodType,
       createdAt: DateTime.now(),
     );
-    final result = await _logMoodUseCase(userId: userId, entry: entry);
+    final result = await _logMoodUseCase(entry: entry);
     result.fold(
       (failure) => emit(
         state.copyWith(
@@ -125,25 +86,6 @@ class MoodTrackerBloc extends Bloc<MoodTrackerEvent, MoodTrackerState> {
           lastLogged: logged,
         ),
       ),
-    );
-  }
-
-  Future<void> _onDeleteRequested(
-    MoodTrackerDeleteRequested event,
-    Emitter<MoodTrackerState> emit,
-  ) async {
-    final result = await _deleteMoodUseCase(
-      userId: event.userId,
-      moodId: event.moodId,
-    );
-    result.fold(
-      (failure) => emit(
-        state.copyWith(
-          status: MoodTrackerStatus.failure,
-          failure: failure,
-        ),
-      ),
-      (_) {},
     );
   }
 

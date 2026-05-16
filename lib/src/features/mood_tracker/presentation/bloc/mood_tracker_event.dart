@@ -10,13 +10,8 @@ abstract class MoodTrackerEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class MoodTrackerHistorySubscriptionRequested extends MoodTrackerEvent {
-  const MoodTrackerHistorySubscriptionRequested({required this.userId});
-
-  final String userId;
-
-  @override
-  List<Object?> get props => [userId];
+class MoodTrackerStarted extends MoodTrackerEvent {
+  const MoodTrackerStarted();
 }
 
 class MoodTrackerHistoryUpdated extends MoodTrackerEvent {
@@ -28,46 +23,11 @@ class MoodTrackerHistoryUpdated extends MoodTrackerEvent {
   List<Object?> get props => [entries];
 }
 
-class MoodTrackerTypeSelected extends MoodTrackerEvent {
-  const MoodTrackerTypeSelected(this.moodType);
+class MoodTrackerLogRequested extends MoodTrackerEvent {
+  const MoodTrackerLogRequested(this.moodType);
 
   final MoodType moodType;
 
   @override
   List<Object?> get props => [moodType];
-}
-
-class MoodTrackerLogRequested extends MoodTrackerEvent {
-  const MoodTrackerLogRequested({
-    required this.userId,
-    required this.moodType,
-  });
-
-  final String userId;
-  final MoodType moodType;
-
-  @override
-  List<Object?> get props => [userId, moodType];
-}
-
-class MoodTrackerLogSubmitted extends MoodTrackerEvent {
-  const MoodTrackerLogSubmitted({required this.userId});
-
-  final String userId;
-
-  @override
-  List<Object?> get props => [userId];
-}
-
-class MoodTrackerDeleteRequested extends MoodTrackerEvent {
-  const MoodTrackerDeleteRequested({
-    required this.userId,
-    required this.moodId,
-  });
-
-  final String userId;
-  final String moodId;
-
-  @override
-  List<Object?> get props => [userId, moodId];
 }
