@@ -60,7 +60,6 @@ class HomePage extends StatelessWidget {
                       child: MoodFaceAvatar(
                         moodType: MoodType.happy,
                         size: isWide ? 120 : 96,
-                        intensity: 4,
                       ),
                     ),
                   ),

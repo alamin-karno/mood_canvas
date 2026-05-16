@@ -33,19 +33,16 @@ class _OnboardingPageState extends State<OnboardingPage> {
         title: 'onboarding.onboarding_title_1'.tr(),
         subtitle: 'onboarding.onboarding_subtitle_1'.tr(),
         mood: MoodType.happy,
-        intensity: 4,
       ),
       OnboardingSlide(
         title: 'onboarding.onboarding_title_2'.tr(),
         subtitle: 'onboarding.onboarding_subtitle_2'.tr(),
         mood: MoodType.neutral,
-        intensity: 3,
       ),
       OnboardingSlide(
         title: 'onboarding.onboarding_title_3'.tr(),
         subtitle: 'onboarding.onboarding_subtitle_3'.tr(),
         mood: MoodType.sad,
-        intensity: 5,
       ),
     ];
   }
@@ -134,7 +131,6 @@ class _OnboardingView extends StatelessWidget {
                                 child: MoodFaceAvatar(
                                   moodType: page.mood,
                                   size: faceSize,
-                                  intensity: page.intensity,
                                 ),
                               ),
                             ),

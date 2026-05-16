@@ -4,14 +4,8 @@ import 'package:mood_canvas/src/features/mood_tracker/presentation/painters/mood
 
 void main() {
   test('MoodFacePainter shouldRepaint when mood changes', () {
-    final painterA = MoodFacePainter(
-      moodType: MoodType.happy,
-      intensity: 3,
-    );
-    final painterB = MoodFacePainter(
-      moodType: MoodType.sad,
-      intensity: 3,
-    );
+    final painterA = MoodFacePainter(moodType: MoodType.happy);
+    final painterB = MoodFacePainter(moodType: MoodType.sad);
 
     expect(painterA.shouldRepaint(painterB), isTrue);
   });

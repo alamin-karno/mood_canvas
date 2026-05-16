@@ -8,13 +8,11 @@ class MoodFaceAvatar extends StatelessWidget {
     super.key,
     required this.moodType,
     required this.size,
-    this.intensity = 3,
     this.selected = false,
   });
 
   final MoodType moodType;
   final double size;
-  final int intensity;
   final bool selected;
 
   @override
@@ -27,7 +25,6 @@ class MoodFaceAvatar extends StatelessWidget {
         size: Size.square(size),
         painter: MoodFacePainter(
           moodType: moodType,
-          intensity: intensity,
           selected: selected,
         ),
       ),
