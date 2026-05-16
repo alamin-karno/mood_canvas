@@ -8,6 +8,7 @@ abstract final class AppRoutes {
   static const String forgotPassword = '/forgot-password';
   static const String moodLog = '/mood/log';
   static const String moodHistory = '/mood/history';
+  static const String moodTracker = '/mood/tracker';
 
   static const Set<String> publicRoutes = {
     onboarding,

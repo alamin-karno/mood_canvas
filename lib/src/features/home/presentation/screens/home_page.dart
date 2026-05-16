@@ -65,14 +65,7 @@ class HomePage extends StatelessWidget {
                   ),
                   AppButton(
                     label: 'mood.log_mood'.tr(),
-                    onPressed: () => context.push(AppRoutes.moodLog),
-                    isFullWidth: true,
-                  ),
-                  SizedBox(height: AppSpacing.md.h),
-                  AppButton(
-                    label: 'mood.view_history'.tr(),
-                    variant: ButtonVariant.outline,
-                    onPressed: () => context.push(AppRoutes.moodHistory),
+                    onPressed: () => context.push(AppRoutes.moodTracker),
                     isFullWidth: true,
                   ),
                 ],

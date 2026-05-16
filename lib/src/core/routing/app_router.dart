@@ -11,6 +11,7 @@ import '../../features/home/presentation/screens/home_page.dart';
 import '../../features/mood_tracker/presentation/bloc/mood_tracker_bloc.dart';
 import '../../features/mood_tracker/presentation/pages/mood_canvas_page.dart';
 import '../../features/mood_tracker/presentation/pages/mood_history_page.dart';
+import '../../features/mood_tracker/presentation/pages/mood_tracker_page.dart';
 import '../../features/onboarding/presentation/screens/onboarding_page.dart';
 import 'app_routes.dart';
 import 'global_navigator.dart';
@@ -98,6 +99,14 @@ GoRouter _createRouter() {
         builder: (context, state) => BlocProvider(
           create: (_) => getIt<MoodTrackerBloc>(),
           child: const MoodHistoryPage(),
+        ),
+      ),
+      GoRoute(
+        path: AppRoutes.moodTracker,
+        name: 'moodTracker',
+        builder: (context, state) => BlocProvider(
+          create: (_) => getIt<MoodTrackerBloc>(),
+          child: const MoodTrackerPage(),
         ),
       ),
     ],
