@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/entities/mood_entry.dart';
+import '../../domain/entities/mood_type.dart';
 import '../../domain/usecases/delete_mood_usecase.dart';
 import '../../domain/usecases/log_mood_usecase.dart';
 import '../../domain/usecases/watch_mood_history_usecase.dart';
@@ -23,6 +24,7 @@ class MoodTrackerBloc extends Bloc<MoodTrackerEvent, MoodTrackerState> {
     );
     on<MoodTrackerHistoryUpdated>(_onHistoryUpdated);
     on<MoodTrackerTypeSelected>(_onMoodTypeSelected);
+    on<MoodTrackerLogRequested>(_onLogRequested);
     on<MoodTrackerLogSubmitted>(_onLogSubmitted);
     on<MoodTrackerDeleteRequested>(_onDeleteRequested);
   }
@@ -70,22 +72,46 @@ class MoodTrackerBloc extends Bloc<MoodTrackerEvent, MoodTrackerState> {
     emit(state.copyWith(selectedMood: event.moodType));
   }
 
+  Future<void> _onLogRequested(
+    MoodTrackerLogRequested event,
+    Emitter<MoodTrackerState> emit,
+  ) async {
+    await _logMood(
+      userId: event.userId,
+      moodType: event.moodType,
+      emit: emit,
+    );
+  }
+
   Future<void> _onLogSubmitted(
     MoodTrackerLogSubmitted event,
     Emitter<MoodTrackerState> emit,
   ) async {
+    await _logMood(
+      userId: event.userId,
+      moodType: state.selectedMood,
+      emit: emit,
+    );
+  }
+
+  Future<void> _logMood({
+    required String userId,
+    required MoodType moodType,
+    required Emitter<MoodTrackerState> emit,
+  }) async {
     emit(
       state.copyWith(
         status: MoodTrackerStatus.logging,
+        selectedMood: moodType,
         clearFailure: true,
       ),
     );
     final entry = MoodEntry(
       id: '',
-      moodType: state.selectedMood,
+      moodType: moodType,
       createdAt: DateTime.now(),
     );
-    final result = await _logMoodUseCase(userId: event.userId, entry: entry);
+    final result = await _logMoodUseCase(userId: userId, entry: entry);
     result.fold(
       (failure) => emit(
         state.copyWith(
