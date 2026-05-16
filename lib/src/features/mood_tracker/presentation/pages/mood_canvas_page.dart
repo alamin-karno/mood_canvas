@@ -16,14 +16,6 @@ class MoodCanvasPage extends StatefulWidget {
 }
 
 class _MoodCanvasPageState extends State<MoodCanvasPage> {
-  final _noteController = TextEditingController();
-
-  @override
-  void dispose() {
-    _noteController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     final userId = context.watch<SessionBloc>().state.user?.id;
@@ -78,7 +70,6 @@ class _MoodCanvasPageState extends State<MoodCanvasPage> {
                                 MoodFaceAvatar(
                                   moodType: type,
                                   size: faceSize,
-                                  intensity: state.intensity,
                                   selected: selected,
                                 ),
                                 SizedBox(height: AppSpacing.xs.h),
@@ -92,29 +83,6 @@ class _MoodCanvasPageState extends State<MoodCanvasPage> {
                         }).toList(),
                       ),
                       SizedBox(height: AppSpacing.xl.h),
-                      Text('mood.intensity'.tr()),
-                      Slider(
-                        value: state.intensity.toDouble(),
-                        min: 1,
-                        max: 5,
-                        divisions: 4,
-                        label: state.intensity.toString(),
-                        onChanged: state.isLoading
-                            ? null
-                            : (v) => context.read<MoodTrackerBloc>().add(
-                                  MoodTrackerIntensityChanged(v.round()),
-                                ),
-                      ),
-                      AppTextField(
-                        controller: _noteController,
-                        enabled: !state.isLoading,
-                        label: 'mood.note_optional'.tr(),
-                        maxLines: 3,
-                        onChanged: (value) => context
-                            .read<MoodTrackerBloc>()
-                            .add(MoodTrackerNoteChanged(value)),
-                      ),
-                      SizedBox(height: AppSpacing.lg.h),
                       AppButton(
                         label: 'mood.save_mood'.tr(),
                         isLoading: state.isLoading,

@@ -23,8 +23,6 @@ class MoodTrackerBloc extends Bloc<MoodTrackerEvent, MoodTrackerState> {
     );
     on<MoodTrackerHistoryUpdated>(_onHistoryUpdated);
     on<MoodTrackerTypeSelected>(_onMoodTypeSelected);
-    on<MoodTrackerIntensityChanged>(_onIntensityChanged);
-    on<MoodTrackerNoteChanged>(_onNoteChanged);
     on<MoodTrackerLogSubmitted>(_onLogSubmitted);
     on<MoodTrackerDeleteRequested>(_onDeleteRequested);
   }
@@ -72,20 +70,6 @@ class MoodTrackerBloc extends Bloc<MoodTrackerEvent, MoodTrackerState> {
     emit(state.copyWith(selectedMood: event.moodType));
   }
 
-  void _onIntensityChanged(
-    MoodTrackerIntensityChanged event,
-    Emitter<MoodTrackerState> emit,
-  ) {
-    emit(state.copyWith(intensity: event.intensity));
-  }
-
-  void _onNoteChanged(
-    MoodTrackerNoteChanged event,
-    Emitter<MoodTrackerState> emit,
-  ) {
-    emit(state.copyWith(note: event.note));
-  }
-
   Future<void> _onLogSubmitted(
     MoodTrackerLogSubmitted event,
     Emitter<MoodTrackerState> emit,
@@ -98,10 +82,7 @@ class MoodTrackerBloc extends Bloc<MoodTrackerEvent, MoodTrackerState> {
     );
     final entry = MoodEntry(
       id: '',
-      userId: event.userId,
       moodType: state.selectedMood,
-      intensity: state.intensity,
-      note: state.note.isEmpty ? null : state.note,
       createdAt: DateTime.now(),
     );
     final result = await _logMoodUseCase(userId: event.userId, entry: entry);
@@ -116,7 +97,6 @@ class MoodTrackerBloc extends Bloc<MoodTrackerEvent, MoodTrackerState> {
         state.copyWith(
           status: MoodTrackerStatus.success,
           lastLogged: logged,
-          note: '',
         ),
       ),
     );

@@ -38,13 +38,13 @@ class _OnboardingPageState extends State<OnboardingPage> {
       OnboardingSlide(
         title: 'onboarding.onboarding_title_2'.tr(),
         subtitle: 'onboarding.onboarding_subtitle_2'.tr(),
-        mood: MoodType.calm,
+        mood: MoodType.neutral,
         intensity: 3,
       ),
       OnboardingSlide(
         title: 'onboarding.onboarding_title_3'.tr(),
         subtitle: 'onboarding.onboarding_subtitle_3'.tr(),
-        mood: MoodType.excited,
+        mood: MoodType.sad,
         intensity: 5,
       ),
     ];

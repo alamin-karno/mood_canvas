@@ -27,10 +27,7 @@ class FirestoreMoodTrackerDataSource implements MoodTrackerRemoteDataSource {
           : _moodsCollection(userId).doc(mood.id);
       final model = MoodTrackerModel(
         id: docRef.id,
-        userId: userId,
         moodType: mood.moodType,
-        intensity: mood.intensity,
-        note: mood.note,
         createdAt: mood.createdAt,
       );
       await docRef.set(model.toFirestore());

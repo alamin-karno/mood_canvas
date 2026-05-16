@@ -18,8 +18,6 @@ class MoodTrackerState extends Equatable {
   const MoodTrackerState({
     this.status = MoodTrackerStatus.initial,
     this.selectedMood = MoodType.happy,
-    this.intensity = 3,
-    this.note = '',
     this.history = const [],
     this.failure,
     this.lastLogged,
@@ -27,8 +25,6 @@ class MoodTrackerState extends Equatable {
 
   final MoodTrackerStatus status;
   final MoodType selectedMood;
-  final int intensity;
-  final String note;
   final List<MoodEntry> history;
   final Failure? failure;
   final MoodEntry? lastLogged;
@@ -40,8 +36,6 @@ class MoodTrackerState extends Equatable {
   MoodTrackerState copyWith({
     MoodTrackerStatus? status,
     MoodType? selectedMood,
-    int? intensity,
-    String? note,
     List<MoodEntry>? history,
     Failure? failure,
     MoodEntry? lastLogged,
@@ -51,8 +45,6 @@ class MoodTrackerState extends Equatable {
     return MoodTrackerState(
       status: status ?? this.status,
       selectedMood: selectedMood ?? this.selectedMood,
-      intensity: intensity ?? this.intensity,
-      note: note ?? this.note,
       history: history ?? this.history,
       failure: clearFailure ? null : (failure ?? this.failure),
       lastLogged: clearLastLogged ? null : (lastLogged ?? this.lastLogged),
@@ -63,8 +55,6 @@ class MoodTrackerState extends Equatable {
   List<Object?> get props => [
         status,
         selectedMood,
-        intensity,
-        note,
         history,
         failure,
         lastLogged,

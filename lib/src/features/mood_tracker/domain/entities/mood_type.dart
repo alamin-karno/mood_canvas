@@ -1,10 +1,7 @@
 enum MoodType {
   happy,
-  calm,
+  neutral,
   sad,
-  anxious,
-  angry,
-  excited,
 }
 
 extension MoodTypeX on MoodType {
@@ -12,16 +9,10 @@ extension MoodTypeX on MoodType {
     switch (this) {
       case MoodType.happy:
         return 'Happy';
-      case MoodType.calm:
-        return 'Calm';
+      case MoodType.neutral:
+        return 'Neutral';
       case MoodType.sad:
         return 'Sad';
-      case MoodType.anxious:
-        return 'Anxious';
-      case MoodType.angry:
-        return 'Angry';
-      case MoodType.excited:
-        return 'Excited';
     }
   }
 }

@@ -65,7 +65,6 @@ class _MoodHistoryPageState extends State<MoodHistoryPage> {
                     MoodFaceAvatar(
                       moodType: entry.moodType,
                       size: 48,
-                      intensity: entry.intensity,
                     ),
                     SizedBox(width: AppSpacing.md.w),
                     Expanded(
@@ -77,14 +76,9 @@ class _MoodHistoryPageState extends State<MoodHistoryPage> {
                             style: context.theme.textTheme.titleSmall,
                           ),
                           Text(
-                            '${entry.intensity}/5 · ${_formatDate(entry.createdAt)}',
+                            _formatDate(entry.createdAt),
                             style: context.theme.textTheme.bodySmall,
                           ),
-                          if (entry.note != null && entry.note!.isNotEmpty)
-                            Text(
-                              entry.note!,
-                              style: context.theme.textTheme.bodyMedium,
-                            ),
                         ],
                       ),
                     ),

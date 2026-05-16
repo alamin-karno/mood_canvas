@@ -38,16 +38,10 @@ class MoodFacePainter extends CustomPainter {
     switch (moodType) {
       case MoodType.happy:
         return const Color(0xFFFFD54F);
-      case MoodType.calm:
+      case MoodType.neutral:
         return const Color(0xFF81D4FA);
       case MoodType.sad:
         return const Color(0xFF90A4AE);
-      case MoodType.anxious:
-        return const Color(0xFFCE93D8);
-      case MoodType.angry:
-        return const Color(0xFFEF9A9A);
-      case MoodType.excited:
-        return const Color(0xFFFFAB91);
     }
   }
 
@@ -79,7 +73,6 @@ class MoodFacePainter extends CustomPainter {
 
     switch (moodType) {
       case MoodType.happy:
-      case MoodType.excited:
         final path = Path()
           ..moveTo(center.dx - mouthWidth, mouthY)
           ..quadraticBezierTo(
@@ -90,7 +83,6 @@ class MoodFacePainter extends CustomPainter {
           );
         canvas.drawPath(path, mouthPaint);
       case MoodType.sad:
-      case MoodType.anxious:
         final path = Path()
           ..moveTo(center.dx - mouthWidth, mouthY + radius * 0.15)
           ..quadraticBezierTo(
@@ -100,16 +92,10 @@ class MoodFacePainter extends CustomPainter {
             mouthY + radius * 0.15,
           );
         canvas.drawPath(path, mouthPaint);
-      case MoodType.calm:
+      case MoodType.neutral:
         canvas.drawLine(
           Offset(center.dx - mouthWidth * 0.7, mouthY),
           Offset(center.dx + mouthWidth * 0.7, mouthY),
-          mouthPaint,
-        );
-      case MoodType.angry:
-        canvas.drawLine(
-          Offset(center.dx - mouthWidth, mouthY + radius * 0.1),
-          Offset(center.dx + mouthWidth, mouthY + radius * 0.1),
           mouthPaint,
         );
     }

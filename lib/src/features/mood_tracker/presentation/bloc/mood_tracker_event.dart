@@ -37,24 +37,6 @@ class MoodTrackerTypeSelected extends MoodTrackerEvent {
   List<Object?> get props => [moodType];
 }
 
-class MoodTrackerIntensityChanged extends MoodTrackerEvent {
-  const MoodTrackerIntensityChanged(this.intensity);
-
-  final int intensity;
-
-  @override
-  List<Object?> get props => [intensity];
-}
-
-class MoodTrackerNoteChanged extends MoodTrackerEvent {
-  const MoodTrackerNoteChanged(this.note);
-
-  final String note;
-
-  @override
-  List<Object?> get props => [note];
-}
-
 class MoodTrackerLogSubmitted extends MoodTrackerEvent {
   const MoodTrackerLogSubmitted({required this.userId});
 
