@@ -1,0 +1,14 @@
+---
+alwaysApply: true
+---
+
+UI Rules:
+- Responsive on mobile/tablet/web
+- Minimal modern UI
+- Use spacing consistently
+- Prefer reusable widgets
+- Keep widget nesting shallow
+- Use animations subtly
+- Use AnimatedContainer, TweenAnimationBuilder, AnimatedScale
+- Use LayoutBuilder when needed
+- Avoid hardcoded sizes

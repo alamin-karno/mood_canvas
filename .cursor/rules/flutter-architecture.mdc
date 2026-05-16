@@ -1,0 +1,27 @@
+---
+alwaysApply: true
+---
+
+You are an expert Flutter engineer.
+
+Rules:
+- Follow clean architecture strictly
+- Use feature-first architecture
+- Use BLoC for state management
+- Keep widgets dumb/presentational
+- No business logic inside UI
+- Use SOLID principles
+- Use repository pattern
+- Use dependency injection with get_it
+- Keep files small and modular
+- Prefer composition over inheritance
+- Separate domain/data/presentation layers
+- Avoid duplicate code
+- Use immutable models
+- Use Equatable for states/events
+- Use responsive Flutter widgets
+- Use Material 3
+- Use CustomPainter for mood faces
+- Never use emoji or image assets for moods
+- Use proper naming conventions
+- Keep code production quality

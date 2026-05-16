@@ -1,0 +1,12 @@
+---
+alwaysApply: true
+---
+
+Bloc Rules:
+- One responsibility per bloc
+- Events trigger usecases
+- Bloc never directly accesses datasource
+- States immutable
+- Use Equatable
+- Avoid giant blocs
+- No UI code inside bloc
