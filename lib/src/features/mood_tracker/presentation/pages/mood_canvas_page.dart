@@ -3,9 +3,9 @@ import 'package:mood_canvas/src/imports/packages_imports.dart';
 
 import '../../../auth/presentation/bloc/session_bloc.dart';
 import '../../domain/entities/mood_type.dart';
-import '../bloc/mood_bloc.dart';
-import '../bloc/mood_event.dart';
-import '../bloc/mood_state.dart';
+import '../bloc/mood_tracker_bloc.dart';
+import '../bloc/mood_tracker_event.dart';
+import '../bloc/mood_tracker_state.dart';
 import '../widgets/mood_face_avatar.dart';
 
 class MoodCanvasPage extends StatefulWidget {
@@ -33,9 +33,10 @@ class _MoodCanvasPageState extends State<MoodCanvasPage> {
       );
     }
 
-    return BlocConsumer<MoodBloc, MoodState>(
+    return BlocConsumer<MoodTrackerBloc, MoodTrackerState>(
       listenWhen: (prev, next) =>
-          prev.status != next.status && next.status == MoodStatus.success,
+          prev.status != next.status &&
+          next.status == MoodTrackerStatus.success,
       listener: (context, state) {
         showToast(
           context,
@@ -69,8 +70,8 @@ class _MoodCanvasPageState extends State<MoodCanvasPage> {
                           final selected = state.selectedMood == type;
                           return GestureDetector(
                             onTap: () => context
-                                .read<MoodBloc>()
-                                .add(MoodTypeSelected(type)),
+                                .read<MoodTrackerBloc>()
+                                .add(MoodTrackerTypeSelected(type)),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -100,8 +101,8 @@ class _MoodCanvasPageState extends State<MoodCanvasPage> {
                         label: state.intensity.toString(),
                         onChanged: state.isLoading
                             ? null
-                            : (v) => context.read<MoodBloc>().add(
-                                  MoodIntensityChanged(v.round()),
+                            : (v) => context.read<MoodTrackerBloc>().add(
+                                  MoodTrackerIntensityChanged(v.round()),
                                 ),
                       ),
                       AppTextField(
@@ -110,8 +111,8 @@ class _MoodCanvasPageState extends State<MoodCanvasPage> {
                         label: 'mood.note_optional'.tr(),
                         maxLines: 3,
                         onChanged: (value) => context
-                            .read<MoodBloc>()
-                            .add(MoodNoteChanged(value)),
+                            .read<MoodTrackerBloc>()
+                            .add(MoodTrackerNoteChanged(value)),
                       ),
                       SizedBox(height: AppSpacing.lg.h),
                       AppButton(
@@ -119,8 +120,8 @@ class _MoodCanvasPageState extends State<MoodCanvasPage> {
                         isLoading: state.isLoading,
                         onPressed: state.isLoading
                             ? null
-                            : () => context.read<MoodBloc>().add(
-                                  MoodLogSubmitted(userId: userId),
+                            : () => context.read<MoodTrackerBloc>().add(
+                                  MoodTrackerLogSubmitted(userId: userId),
                                 ),
                         isFullWidth: true,
                       ),

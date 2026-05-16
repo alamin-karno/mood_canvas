@@ -5,11 +5,18 @@ import 'package:mood_canvas/src/core/error/failure.dart';
 import '../../domain/entities/mood_entry.dart';
 import '../../domain/entities/mood_type.dart';
 
-enum MoodStatus { initial, loading, loaded, logging, success, failure }
+enum MoodTrackerStatus {
+  initial,
+  loading,
+  loaded,
+  logging,
+  success,
+  failure,
+}
 
-class MoodState extends Equatable {
-  const MoodState({
-    this.status = MoodStatus.initial,
+class MoodTrackerState extends Equatable {
+  const MoodTrackerState({
+    this.status = MoodTrackerStatus.initial,
     this.selectedMood = MoodType.happy,
     this.intensity = 3,
     this.note = '',
@@ -18,7 +25,7 @@ class MoodState extends Equatable {
     this.lastLogged,
   });
 
-  final MoodStatus status;
+  final MoodTrackerStatus status;
   final MoodType selectedMood;
   final int intensity;
   final String note;
@@ -27,10 +34,11 @@ class MoodState extends Equatable {
   final MoodEntry? lastLogged;
 
   bool get isLoading =>
-      status == MoodStatus.loading || status == MoodStatus.logging;
+      status == MoodTrackerStatus.loading ||
+      status == MoodTrackerStatus.logging;
 
-  MoodState copyWith({
-    MoodStatus? status,
+  MoodTrackerState copyWith({
+    MoodTrackerStatus? status,
     MoodType? selectedMood,
     int? intensity,
     String? note,
@@ -40,7 +48,7 @@ class MoodState extends Equatable {
     bool clearFailure = false,
     bool clearLastLogged = false,
   }) {
-    return MoodState(
+    return MoodTrackerState(
       status: status ?? this.status,
       selectedMood: selectedMood ?? this.selectedMood,
       intensity: intensity ?? this.intensity,

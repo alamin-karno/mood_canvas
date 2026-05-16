@@ -1,4 +1,4 @@
-import '../../../mood/domain/entities/mood_type.dart';
+import '../../../mood_tracker/domain/entities/mood_type.dart';
 
 class OnboardingSlide {
   const OnboardingSlide({

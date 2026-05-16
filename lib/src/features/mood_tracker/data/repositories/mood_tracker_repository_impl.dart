@@ -1,15 +1,16 @@
 import 'package:mood_canvas/src/utils/typedefs.dart';
 
 import '../../domain/entities/mood_entry.dart';
-import '../../domain/repositories/mood_repository.dart';
-import '../datasources/mood_remote_datasource.dart';
-import '../models/mood_model.dart';
+import '../../domain/repositories/mood_tracker_repository.dart';
+import '../datasources/mood_tracker_remote_datasource.dart';
+import '../models/mood_tracker_model.dart';
 
-class MoodRepositoryImpl implements MoodRepository {
-  MoodRepositoryImpl({required MoodRemoteDataSource remoteDataSource})
-      : _remoteDataSource = remoteDataSource;
+class MoodTrackerRepositoryImpl implements MoodTrackerRepository {
+  MoodTrackerRepositoryImpl({
+    required MoodTrackerRemoteDataSource remoteDataSource,
+  }) : _remoteDataSource = remoteDataSource;
 
-  final MoodRemoteDataSource _remoteDataSource;
+  final MoodTrackerRemoteDataSource _remoteDataSource;
 
   @override
   FutureEither<MoodEntry> logMood({
@@ -18,7 +19,7 @@ class MoodRepositoryImpl implements MoodRepository {
   }) async {
     final result = await _remoteDataSource.logMood(
       userId: userId,
-      mood: MoodModel.fromEntity(entry),
+      mood: MoodTrackerModel.fromEntity(entry),
     );
     return result.map((model) => model.toEntity());
   }

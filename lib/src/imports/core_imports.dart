@@ -19,5 +19,5 @@ export '../features/auth/presentation/screens/signup_screen.dart';
 export '../features/auth/presentation/screens/forgot_password_screen.dart';
 export '../features/home/presentation/screens/home_page.dart';
 export '../features/onboarding/presentation/screens/onboarding_page.dart';
-export '../features/mood/presentation/pages/mood_canvas_page.dart';
-export '../features/mood/presentation/pages/mood_history_page.dart';
+export '../features/mood_tracker/presentation/pages/mood_canvas_page.dart';
+export '../features/mood_tracker/presentation/pages/mood_history_page.dart';

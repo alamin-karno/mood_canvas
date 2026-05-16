@@ -3,9 +3,9 @@ import 'package:mood_canvas/src/imports/packages_imports.dart';
 
 import '../../../auth/presentation/bloc/session_bloc.dart';
 import '../../domain/entities/mood_type.dart';
-import '../bloc/mood_bloc.dart';
-import '../bloc/mood_event.dart';
-import '../bloc/mood_state.dart';
+import '../bloc/mood_tracker_bloc.dart';
+import '../bloc/mood_tracker_event.dart';
+import '../bloc/mood_tracker_state.dart';
 import '../widgets/mood_face_avatar.dart';
 
 class MoodHistoryPage extends StatefulWidget {
@@ -22,8 +22,8 @@ class _MoodHistoryPageState extends State<MoodHistoryPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final userId = context.read<SessionBloc>().state.user?.id;
       if (userId != null) {
-        context.read<MoodBloc>().add(
-              MoodHistorySubscriptionRequested(userId: userId),
+        context.read<MoodTrackerBloc>().add(
+              MoodTrackerHistorySubscriptionRequested(userId: userId),
             );
       }
     });
@@ -35,13 +35,14 @@ class _MoodHistoryPageState extends State<MoodHistoryPage> {
 
     return Scaffold(
       appBar: AppTopBar(title: 'mood.history'.tr()),
-      body: BlocBuilder<MoodBloc, MoodState>(
+      body: BlocBuilder<MoodTrackerBloc, MoodTrackerState>(
         builder: (context, state) {
           if (userId == null) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          if (state.status == MoodStatus.loading && state.history.isEmpty) {
+          if (state.status == MoodTrackerStatus.loading &&
+              state.history.isEmpty) {
             return const Center(child: CircularProgressIndicator());
           }
 
@@ -89,8 +90,8 @@ class _MoodHistoryPageState extends State<MoodHistoryPage> {
                     ),
                     IconButton(
                       icon: const Icon(Icons.delete_outline),
-                      onPressed: () => context.read<MoodBloc>().add(
-                            MoodDeleteRequested(
+                      onPressed: () => context.read<MoodTrackerBloc>().add(
+                            MoodTrackerDeleteRequested(
                               userId: userId,
                               moodId: entry.id,
                             ),

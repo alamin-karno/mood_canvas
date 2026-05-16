@@ -3,11 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:mood_canvas/src/core/error/error.dart';
 import 'package:mood_canvas/src/utils/typedefs.dart';
 
-import '../models/mood_model.dart';
-import 'mood_remote_datasource.dart';
+import '../models/mood_tracker_model.dart';
+import 'mood_tracker_remote_datasource.dart';
 
-class FirestoreMoodDataSource implements MoodRemoteDataSource {
-  FirestoreMoodDataSource({FirebaseFirestore? firestore})
+class FirestoreMoodTrackerDataSource implements MoodTrackerRemoteDataSource {
+  FirestoreMoodTrackerDataSource({FirebaseFirestore? firestore})
       : _firestore = firestore ?? FirebaseFirestore.instance;
 
   final FirebaseFirestore _firestore;
@@ -17,15 +17,15 @@ class FirestoreMoodDataSource implements MoodRemoteDataSource {
   }
 
   @override
-  FutureEither<MoodModel> logMood({
+  FutureEither<MoodTrackerModel> logMood({
     required String userId,
-    required MoodModel mood,
+    required MoodTrackerModel mood,
   }) async {
     return runTask(() async {
       final docRef = mood.id.isEmpty
           ? _moodsCollection(userId).doc()
           : _moodsCollection(userId).doc(mood.id);
-      final model = MoodModel(
+      final model = MoodTrackerModel(
         id: docRef.id,
         userId: userId,
         moodType: mood.moodType,
@@ -39,19 +39,19 @@ class FirestoreMoodDataSource implements MoodRemoteDataSource {
   }
 
   @override
-  Stream<List<MoodModel>> watchMoodHistory({required String userId}) {
+  Stream<List<MoodTrackerModel>> watchMoodHistory({required String userId}) {
     return _moodsCollection(userId)
         .orderBy('createdAt', descending: true)
         .snapshots()
         .map(
           (snapshot) => snapshot.docs
-              .map(MoodModel.fromFirestore)
+              .map(MoodTrackerModel.fromFirestore)
               .toList(),
         );
   }
 
   @override
-  FutureEither<List<MoodModel>> getMoodByDateRange({
+  FutureEither<List<MoodTrackerModel>> getMoodByDateRange({
     required String userId,
     required DateTime start,
     required DateTime end,
@@ -62,7 +62,7 @@ class FirestoreMoodDataSource implements MoodRemoteDataSource {
           .where('createdAt', isLessThanOrEqualTo: Timestamp.fromDate(end))
           .orderBy('createdAt', descending: true)
           .get();
-      return snapshot.docs.map(MoodModel.fromFirestore).toList();
+      return snapshot.docs.map(MoodTrackerModel.fromFirestore).toList();
     }, requiresNetwork: true);
   }
 

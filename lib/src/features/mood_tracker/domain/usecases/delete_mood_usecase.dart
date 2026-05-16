@@ -1,11 +1,11 @@
 import 'package:mood_canvas/src/utils/typedefs.dart';
 
-import '../repositories/mood_repository.dart';
+import '../repositories/mood_tracker_repository.dart';
 
 class DeleteMoodUseCase {
   const DeleteMoodUseCase(this._repository);
 
-  final MoodRepository _repository;
+  final MoodTrackerRepository _repository;
 
   FutureEither<void> call({
     required String userId,

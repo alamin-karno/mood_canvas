@@ -8,9 +8,9 @@ import '../../features/auth/presentation/screens/forgot_password_screen.dart';
 import '../../features/auth/presentation/screens/login_screen.dart';
 import '../../features/auth/presentation/screens/signup_screen.dart';
 import '../../features/home/presentation/screens/home_page.dart';
-import '../../features/mood/presentation/bloc/mood_bloc.dart';
-import '../../features/mood/presentation/pages/mood_canvas_page.dart';
-import '../../features/mood/presentation/pages/mood_history_page.dart';
+import '../../features/mood_tracker/presentation/bloc/mood_tracker_bloc.dart';
+import '../../features/mood_tracker/presentation/pages/mood_canvas_page.dart';
+import '../../features/mood_tracker/presentation/pages/mood_history_page.dart';
 import '../../features/onboarding/presentation/screens/onboarding_page.dart';
 import 'app_routes.dart';
 import 'global_navigator.dart';
@@ -88,7 +88,7 @@ GoRouter _createRouter() {
         path: AppRoutes.moodLog,
         name: 'moodLog',
         builder: (context, state) => BlocProvider(
-          create: (_) => getIt<MoodBloc>(),
+          create: (_) => getIt<MoodTrackerBloc>(),
           child: const MoodCanvasPage(),
         ),
       ),
@@ -96,7 +96,7 @@ GoRouter _createRouter() {
         path: AppRoutes.moodHistory,
         name: 'moodHistory',
         builder: (context, state) => BlocProvider(
-          create: (_) => getIt<MoodBloc>(),
+          create: (_) => getIt<MoodTrackerBloc>(),
           child: const MoodHistoryPage(),
         ),
       ),

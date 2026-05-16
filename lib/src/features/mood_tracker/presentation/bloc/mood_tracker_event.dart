@@ -3,15 +3,15 @@ import 'package:equatable/equatable.dart';
 import '../../domain/entities/mood_entry.dart';
 import '../../domain/entities/mood_type.dart';
 
-abstract class MoodEvent extends Equatable {
-  const MoodEvent();
+abstract class MoodTrackerEvent extends Equatable {
+  const MoodTrackerEvent();
 
   @override
   List<Object?> get props => [];
 }
 
-class MoodHistorySubscriptionRequested extends MoodEvent {
-  const MoodHistorySubscriptionRequested({required this.userId});
+class MoodTrackerHistorySubscriptionRequested extends MoodTrackerEvent {
+  const MoodTrackerHistorySubscriptionRequested({required this.userId});
 
   final String userId;
 
@@ -19,8 +19,8 @@ class MoodHistorySubscriptionRequested extends MoodEvent {
   List<Object?> get props => [userId];
 }
 
-class MoodHistoryUpdated extends MoodEvent {
-  const MoodHistoryUpdated(this.entries);
+class MoodTrackerHistoryUpdated extends MoodTrackerEvent {
+  const MoodTrackerHistoryUpdated(this.entries);
 
   final List<MoodEntry> entries;
 
@@ -28,8 +28,8 @@ class MoodHistoryUpdated extends MoodEvent {
   List<Object?> get props => [entries];
 }
 
-class MoodTypeSelected extends MoodEvent {
-  const MoodTypeSelected(this.moodType);
+class MoodTrackerTypeSelected extends MoodTrackerEvent {
+  const MoodTrackerTypeSelected(this.moodType);
 
   final MoodType moodType;
 
@@ -37,8 +37,8 @@ class MoodTypeSelected extends MoodEvent {
   List<Object?> get props => [moodType];
 }
 
-class MoodIntensityChanged extends MoodEvent {
-  const MoodIntensityChanged(this.intensity);
+class MoodTrackerIntensityChanged extends MoodTrackerEvent {
+  const MoodTrackerIntensityChanged(this.intensity);
 
   final int intensity;
 
@@ -46,8 +46,8 @@ class MoodIntensityChanged extends MoodEvent {
   List<Object?> get props => [intensity];
 }
 
-class MoodNoteChanged extends MoodEvent {
-  const MoodNoteChanged(this.note);
+class MoodTrackerNoteChanged extends MoodTrackerEvent {
+  const MoodTrackerNoteChanged(this.note);
 
   final String note;
 
@@ -55,8 +55,8 @@ class MoodNoteChanged extends MoodEvent {
   List<Object?> get props => [note];
 }
 
-class MoodLogSubmitted extends MoodEvent {
-  const MoodLogSubmitted({required this.userId});
+class MoodTrackerLogSubmitted extends MoodTrackerEvent {
+  const MoodTrackerLogSubmitted({required this.userId});
 
   final String userId;
 
@@ -64,8 +64,8 @@ class MoodLogSubmitted extends MoodEvent {
   List<Object?> get props => [userId];
 }
 
-class MoodDeleteRequested extends MoodEvent {
-  const MoodDeleteRequested({
+class MoodTrackerDeleteRequested extends MoodTrackerEvent {
+  const MoodTrackerDeleteRequested({
     required this.userId,
     required this.moodId,
   });

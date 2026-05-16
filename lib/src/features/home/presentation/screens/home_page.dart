@@ -2,8 +2,8 @@ import 'package:mood_canvas/src/imports/core_imports.dart';
 import 'package:mood_canvas/src/imports/packages_imports.dart';
 
 import '../../../auth/presentation/bloc/session_bloc.dart';
-import '../../../mood/presentation/widgets/mood_face_avatar.dart';
-import '../../../mood/domain/entities/mood_type.dart';
+import '../../../mood_tracker/presentation/widgets/mood_face_avatar.dart';
+import '../../../mood_tracker/domain/entities/mood_type.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

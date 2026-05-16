@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../domain/entities/mood_entry.dart';
 import '../../domain/entities/mood_type.dart';
 
-class MoodModel {
-  const MoodModel({
+class MoodTrackerModel {
+  const MoodTrackerModel({
     required this.id,
     required this.userId,
     required this.moodType,
@@ -20,9 +20,11 @@ class MoodModel {
   final String? note;
   final DateTime createdAt;
 
-  factory MoodModel.fromFirestore(DocumentSnapshot<Map<String, dynamic>> doc) {
+  factory MoodTrackerModel.fromFirestore(
+    DocumentSnapshot<Map<String, dynamic>> doc,
+  ) {
     final data = doc.data() ?? {};
-    return MoodModel(
+    return MoodTrackerModel(
       id: doc.id,
       userId: data['userId'] as String? ?? '',
       moodType: data['moodType'] as String? ?? MoodType.calm.name,
@@ -53,8 +55,8 @@ class MoodModel {
     );
   }
 
-  factory MoodModel.fromEntity(MoodEntry entry) {
-    return MoodModel(
+  factory MoodTrackerModel.fromEntity(MoodEntry entry) {
+    return MoodTrackerModel(
       id: entry.id,
       userId: entry.userId,
       moodType: entry.moodType.name,

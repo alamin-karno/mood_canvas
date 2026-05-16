@@ -49,7 +49,7 @@ lib/
     ├── core/           # routing, firebase, error handling
     ├── features/
     │   ├── auth/
-    │   ├── mood/
+    │   ├── mood_tracker/
     │   ├── home/
     │   └── onboarding/
     ├── shared/         # design system widgets
