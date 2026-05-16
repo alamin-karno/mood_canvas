@@ -1,65 +1,68 @@
 # mood_canvas
 
-Track emotions visually with custom-drawn expressive faces.
+A single-screen Flutter web mood tracker. Tap a custom-drawn face to log how you feel, browse your last seven entries in a horizontal timeline, and tap any past entry for a brief animation.
 
-## Architecture
+**Live demo:** https://mood-canvas.web.app (update after deploy)
 
-- **Feature-first** layout under `lib/src/features/`
-- **Clean architecture**: domain (entities, repositories, use cases) → data (datasources, models) → presentation (bloc, pages)
-- **State**: `flutter_bloc`
-- **DI**: `get_it` in [`lib/injection.dart`](lib/injection.dart)
-- **Backend**: Firebase Auth + Cloud Firestore
+**Repository:** https://github.com/alamin-karno/mood_canvas
+
+## Features
+
+- Three moods (happy, neutral, sad) drawn with `CustomPainter` (`drawCircle`, `drawArc`, `drawPath`)
+- Tap a face to log immediately
+- Horizontal timeline of the 7 most recent entries (date, face, mood color accent)
+- Tap a timeline entry to pulse it briefly
+- Local persistence via `shared_preferences` (no backend required)
 
 ## Getting started
 
 ```bash
 flutter pub get
-cp .env.example .env   # add your Firebase keys
-flutterfire configure  # recommended: generates platform Firebase config
 flutter run -d chrome
 ```
 
-### Firebase setup
+## Tests
 
-1. Create a Firebase project and enable **Authentication** (Email/Password) and **Firestore**.
-2. Run `flutterfire configure` or copy keys into `.env` (see `.env.example`).
-3. Deploy Firestore security rules (see below).
+```bash
+flutter test
+flutter analyze
+```
 
-### Firestore security rules
+## Build for web
 
-```javascript
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /users/{userId}/moods/{moodId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
-    }
-  }
-}
+```bash
+flutter build web --release
+```
+
+## Deploy to Firebase Hosting
+
+1. Install the [Firebase CLI](https://firebase.google.com/docs/cli) and log in: `firebase login`
+2. Copy `.firebaserc.example` to `.firebaserc` and set your Firebase project id
+3. Build and deploy:
+
+```bash
+flutter build web --release
+firebase deploy --only hosting
 ```
 
 ## Project structure
 
 ```
 lib/
-├── injection.dart
-├── firebase_options.dart
 ├── main.dart
+├── injection.dart
 └── src/
-    ├── core/           # routing, firebase, error handling
-    ├── features/
-    │   ├── auth/
-    │   ├── mood_tracker/
-    │   ├── home/
-    │   └── onboarding/
-    ├── shared/         # design system widgets
+    ├── app.dart
+    ├── config/
+    ├── core/error/
+    ├── features/mood_tracker/
+    │   ├── data/
+    │   ├── domain/
+    │   └── presentation/
+    ├── services/
     └── theme/
 ```
 
-## Commands
+## Architecture
 
-```bash
-flutter analyze
-flutter test
-flutter build web
-```
+Feature-first clean architecture: domain → data → presentation, with BLoC and `get_it` for dependency injection.
