@@ -1,31 +1,27 @@
-import 'package:mood_canvas/src/imports/core_imports.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../injection.dart';
+import 'features/mood_tracker/presentation/bloc/mood_tracker_bloc.dart';
+import 'features/mood_tracker/presentation/bloc/mood_tracker_event.dart';
+import 'features/mood_tracker/presentation/pages/mood_tracker_page.dart';
+import 'theme/theme.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final current = _buildMaterialApp(context);
-    return ScreenUtilWrapper(child: current);
-  }
-
-  Widget _buildMaterialApp(BuildContext context) {
-    return MaterialApp.router(
-      title: 'mood_canvas',
+    return MaterialApp(
+      title: 'Mood Canvas',
       debugShowCheckedModeBanner: false,
       theme: buildLightTheme(primaryColorHex: '#6366F1'),
       darkTheme: buildDarkTheme(primaryColorHex: '#6366F1'),
       themeMode: ThemeMode.system,
-      routerConfig: appRouter,
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      builder: (context, child) {
-        Widget current = child!;
-        current = SkeletonWrapper(child: current);
-        current = SessionListenerWrapper(child: current);
-        return current;
-      },
+      home: BlocProvider(
+        create: (_) => getIt<MoodTrackerBloc>()..add(const MoodTrackerStarted()),
+        child: const MoodTrackerPage(),
+      ),
     );
   }
 }

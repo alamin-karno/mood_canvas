@@ -1,29 +1,14 @@
 import 'package:fpdart/fpdart.dart';
 
-import '../../imports/core_imports.dart';
+import '../../utils/error_handler.dart';
+import '../../utils/logger.dart';
+import '../../utils/typedefs.dart';
+import 'failure.dart';
 
 FutureEither<T> runTask<T>(
   Future<T> Function() action, {
   bool requiresNetwork = false,
 }) async {
-  if (requiresNetwork) {
-    final hasNetwork = await InternetConnectionService().hasConnection();
-
-    if (!hasNetwork) {
-      AppLogger.warning('Network unavailable for task');
-      showGlobalToast(
-        message:
-            'No internet connection. Please check your connection and try again.',
-        status: 'warning',
-      );
-      return left(
-        const NetworkFailure(
-          'No internet connection. Please check your connection and try again.',
-        ),
-      );
-    }
-  }
-
   try {
     final result = await action();
     return right(result);

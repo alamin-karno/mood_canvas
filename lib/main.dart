@@ -1,29 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'injection.dart';
-import 'src/core/firebase/app_firebase.dart';
-import 'src/imports/core_imports.dart';
-import 'src/imports/packages_imports.dart';
 import 'src/app.dart';
+import 'src/config/app_config.dart';
 
 Future<void> main() async {
-  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
+  WidgetsFlutterBinding.ensureInitialized();
   usePathUrlStrategy();
-
-  await EasyLocalization.ensureInitialized();
-  await dotenv.load(fileName: '.env');
-
-  await AppFirebase.initialize();
   await AppConfig.init();
   await setupInjection();
-
-  runApp(
-    const LocalizationWrapper(
-      child: StateWrapper(
-        child: App(),
-      ),
-    ),
-  );
+  runApp(const App());
 }
