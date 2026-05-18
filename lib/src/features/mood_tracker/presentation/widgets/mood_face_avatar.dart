@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-
-import '../../../../theme/app_curves.dart';
-import '../../../../theme/app_durations.dart';
-import '../../domain/entities/mood_type.dart';
-import '../painters/mood_face_painter.dart';
+import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_type.dart';
+import 'package:mood_canvas/src/features/mood_tracker/presentation/painters/mood_face_painter.dart';
+import 'package:mood_canvas/src/theme/app_curves.dart';
+import 'package:mood_canvas/src/theme/app_durations.dart';
 
 class MoodFaceAvatar extends StatelessWidget {
   const MoodFaceAvatar({
-    super.key,
     required this.moodType,
     required this.size,
+    super.key,
     this.selected = false,
   });
 

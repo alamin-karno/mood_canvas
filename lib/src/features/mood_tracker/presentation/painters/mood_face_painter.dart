@@ -1,9 +1,7 @@
 import 'dart:math' as math;
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
-
-import '../../domain/entities/mood_type.dart';
+import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_type.dart';
 
 class MoodFacePainter extends CustomPainter {
   MoodFacePainter({
@@ -271,7 +269,6 @@ class MoodFacePainter extends CustomPainter {
 
   @override
   bool shouldRepaint(covariant MoodFacePainter oldDelegate) {
-    return oldDelegate.moodType != moodType ||
-        oldDelegate.selected != selected;
+    return oldDelegate.moodType != moodType || oldDelegate.selected != selected;
   }
 }

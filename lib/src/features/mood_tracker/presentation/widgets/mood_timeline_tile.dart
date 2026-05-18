@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
-import '../../../../theme/app_borders.dart';
-import '../../../../theme/app_curves.dart';
-import '../../../../theme/app_durations.dart';
-import '../../../../theme/app_spacing.dart';
-import '../../domain/entities/mood_entry.dart';
-import '../../domain/entities/mood_type.dart';
-import 'mood_face_avatar.dart';
+import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_entry.dart';
+import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_type.dart';
+import 'package:mood_canvas/src/features/mood_tracker/presentation/widgets/mood_face_avatar.dart';
+import 'package:mood_canvas/src/theme/app_borders.dart';
+import 'package:mood_canvas/src/theme/app_curves.dart';
+import 'package:mood_canvas/src/theme/app_durations.dart';
+import 'package:mood_canvas/src/theme/app_spacing.dart';
 
 class MoodTimelineTile extends StatelessWidget {
   const MoodTimelineTile({
-    super.key,
     required this.entry,
+    super.key,
     this.animating = false,
     this.onTap,
   });
@@ -63,8 +62,7 @@ class MoodTimelineTile extends StatelessWidget {
                 dateLabel,
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: Theme.of(context).colorScheme.onSurfaceVariant,
-                      fontWeight:
-                          animating ? FontWeight.w700 : FontWeight.w400,
+                      fontWeight: animating ? FontWeight.w700 : FontWeight.w400,
                     ),
                 textAlign: TextAlign.center,
               ),

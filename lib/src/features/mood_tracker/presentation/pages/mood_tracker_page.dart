@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../theme/app_curves.dart';
-import '../../../../theme/app_durations.dart';
-import '../../../../theme/app_spacing.dart';
-import '../../domain/entities/mood_type.dart';
-import '../bloc/mood_tracker_bloc.dart';
-import '../bloc/mood_tracker_event.dart';
-import '../bloc/mood_tracker_state.dart';
-import '../widgets/mood_face_avatar.dart';
-import '../widgets/mood_timeline_tile.dart';
+import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_type.dart';
+import 'package:mood_canvas/src/features/mood_tracker/presentation/bloc/mood_tracker_bloc.dart';
+import 'package:mood_canvas/src/features/mood_tracker/presentation/bloc/mood_tracker_event.dart';
+import 'package:mood_canvas/src/features/mood_tracker/presentation/bloc/mood_tracker_state.dart';
+import 'package:mood_canvas/src/features/mood_tracker/presentation/widgets/mood_face_avatar.dart';
+import 'package:mood_canvas/src/features/mood_tracker/presentation/widgets/mood_timeline_tile.dart';
+import 'package:mood_canvas/src/theme/app_curves.dart';
+import 'package:mood_canvas/src/theme/app_durations.dart';
+import 'package:mood_canvas/src/theme/app_spacing.dart';
 
 class MoodTrackerPage extends StatefulWidget {
   const MoodTrackerPage({super.key});
@@ -62,8 +61,8 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
       child: BlocBuilder<MoodTrackerBloc, MoodTrackerState>(
         builder: (context, state) {
           final recent = state.history.take(7).toList();
-          final highlightPicker = state.isLoading ||
-              state.status == MoodTrackerStatus.success;
+          final highlightPicker =
+              state.isLoading || state.status == MoodTrackerStatus.success;
 
           return Scaffold(
             appBar: AppBar(
@@ -73,8 +72,7 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
             body: SafeArea(
               child: LayoutBuilder(
                 builder: (context, constraints) {
-                  final faceSize =
-                      constraints.maxWidth < 600 ? 72.0 : 88.0;
+                  final faceSize = constraints.maxWidth < 600 ? 72.0 : 88.0;
 
                   return Padding(
                     padding: const EdgeInsets.all(AppSpacing.lg),
@@ -93,8 +91,8 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
                           runSpacing: AppSpacing.md,
                           children: MoodType.values.map((type) {
                             final logging = state.isLoading;
-                            final selected = highlightPicker &&
-                                state.selectedMood == type;
+                            final selected =
+                                highlightPicker && state.selectedMood == type;
                             return GestureDetector(
                               onTap: logging
                                   ? null
@@ -114,8 +112,8 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
                                     duration: AppDurations.quick,
                                     curve: AppCurves.standard,
                                     style: Theme.of(context)
-                                            .textTheme
-                                            .labelSmall!
+                                        .textTheme
+                                        .labelSmall!
                                         .copyWith(
                                           fontWeight: selected
                                               ? FontWeight.w700
@@ -161,8 +159,7 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
                                     final entry = recent[index];
                                     return MoodTimelineTile(
                                       entry: entry,
-                                      animating:
-                                          _animatingEntryId == entry.id,
+                                      animating: _animatingEntryId == entry.id,
                                       onTap: () => _onTimelineTap(entry.id),
                                     );
                                   },

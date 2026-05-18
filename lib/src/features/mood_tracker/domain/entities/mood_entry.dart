@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import 'mood_type.dart';
+import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_type.dart';
 
 class MoodEntry extends Equatable {
   const MoodEntry({

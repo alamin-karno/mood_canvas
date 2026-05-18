@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
-
-import 'injection.dart';
-import 'src/app.dart';
-import 'src/config/app_config.dart';
+import 'package:mood_canvas/injection.dart';
+import 'package:mood_canvas/src/app.dart';
+import 'package:mood_canvas/src/config/app_config.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

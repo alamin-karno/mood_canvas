@@ -1,9 +1,8 @@
 import 'package:fpdart/fpdart.dart';
-
-import '../../utils/error_handler.dart';
-import '../../utils/logger.dart';
-import '../../utils/typedefs.dart';
-import 'failure.dart';
+import 'package:mood_canvas/src/core/error/failure.dart';
+import 'package:mood_canvas/src/utils/error_handler.dart';
+import 'package:mood_canvas/src/utils/logger.dart';
+import 'package:mood_canvas/src/utils/typedefs.dart';
 
 FutureEither<T> runTask<T>(
   Future<T> Function() action, {

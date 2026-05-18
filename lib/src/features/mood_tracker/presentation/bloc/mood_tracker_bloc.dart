@@ -1,13 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../domain/entities/mood_entry.dart';
-import '../../domain/entities/mood_type.dart';
-import '../../domain/usecases/log_mood_usecase.dart';
-import '../../domain/usecases/watch_mood_history_usecase.dart';
-import 'mood_tracker_event.dart';
-import 'mood_tracker_state.dart';
+import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_entry.dart';
+import 'package:mood_canvas/src/features/mood_tracker/domain/usecases/log_mood_usecase.dart';
+import 'package:mood_canvas/src/features/mood_tracker/domain/usecases/watch_mood_history_usecase.dart';
+import 'package:mood_canvas/src/features/mood_tracker/presentation/bloc/mood_tracker_event.dart';
+import 'package:mood_canvas/src/features/mood_tracker/presentation/bloc/mood_tracker_state.dart';
 
 class MoodTrackerBloc extends Bloc<MoodTrackerEvent, MoodTrackerState> {
   MoodTrackerBloc({
@@ -91,7 +89,7 @@ class MoodTrackerBloc extends Bloc<MoodTrackerEvent, MoodTrackerState> {
 
   @override
   Future<void> close() {
-    _historySub?.cancel();
+    unawaited(_historySub?.cancel());
     return super.close();
   }
 }

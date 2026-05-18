@@ -13,7 +13,8 @@ abstract final class AppDurations {
   /// 100 ms — very fast micro-interaction (ripple, press feedback).
   static const Duration veryFast = Duration(milliseconds: 100);
 
-  /// 150 ms — fast transition for small, contained elements (checkboxes, chips).
+  /// 150 ms — fast transition for small,
+  /// contained elements (checkboxes, chips).
   static const Duration fast = Duration(milliseconds: 150);
 
   /// 200 ms — quick transition, tab indicator, list item highlight.

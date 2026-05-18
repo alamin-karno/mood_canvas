@@ -1,4 +1,5 @@
 import 'dart:developer' as developer;
+
 import 'package:flutter/foundation.dart';
 
 class AppLogger {
@@ -15,10 +16,20 @@ class AppLogger {
   }
 
   static void error(String message, [Object? error, StackTrace? stackTrace]) {
-    _log('\x1B[31m$message\x1B[0m', name: 'ERROR', error: error, stackTrace: stackTrace);
+    _log(
+      '\x1B[31m$message\x1B[0m',
+      name: 'ERROR',
+      error: error,
+      stackTrace: stackTrace,
+    );
   }
 
-  static void _log(String message, {String name = '', Object? error, StackTrace? stackTrace}) {
+  static void _log(
+    String message, {
+    String name = '',
+    Object? error,
+    StackTrace? stackTrace,
+  }) {
     if (kDebugMode) {
       developer.log(
         message,

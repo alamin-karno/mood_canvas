@@ -1,9 +1,7 @@
 import 'package:equatable/equatable.dart';
-
 import 'package:mood_canvas/src/core/error/failure.dart';
-
-import '../../domain/entities/mood_entry.dart';
-import '../../domain/entities/mood_type.dart';
+import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_entry.dart';
+import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_type.dart';
 
 enum MoodTrackerStatus {
   initial,

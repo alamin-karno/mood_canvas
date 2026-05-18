@@ -8,10 +8,9 @@
 include: package:very_good_analysis/analysis_options.yaml
 
 analyzer:
-  rules:
-    public_member_api_docs: false
   errors:
     inference_failure_on_untyped_parameter: ignore
+    avoid_dynamic_calls: ignore
   exclude:
     - "**/*.g.dart"
     - "**/*.freezed.dart"
@@ -32,3 +31,8 @@ analyzer:
     strict-casts: false
     strict-inference: true
     strict-raw-types: true
+
+linter:
+   rules:
+    public_member_api_docs: false
+    avoid_catches_without_on_clauses: false

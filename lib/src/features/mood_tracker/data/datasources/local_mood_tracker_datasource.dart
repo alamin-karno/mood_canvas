@@ -2,11 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:mood_canvas/src/core/error/error.dart';
+import 'package:mood_canvas/src/features/mood_tracker/data/datasources/mood_tracker_datasource.dart';
+import 'package:mood_canvas/src/features/mood_tracker/data/models/mood_tracker_model.dart';
 import 'package:mood_canvas/src/services/storage_service.dart';
 import 'package:mood_canvas/src/utils/typedefs.dart';
-
-import '../models/mood_tracker_model.dart';
-import 'mood_tracker_datasource.dart';
 
 class LocalMoodTrackerDataSource implements MoodTrackerDataSource {
   LocalMoodTrackerDataSource({StorageService? storage})
@@ -75,7 +74,7 @@ class LocalMoodTrackerDataSource implements MoodTrackerDataSource {
           controller.add,
           onError: controller.addError,
         );
-        controller.onCancel = () => sub.cancel();
+        controller.onCancel = sub.cancel;
       },
     );
 

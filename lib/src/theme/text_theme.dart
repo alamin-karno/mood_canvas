@@ -65,7 +65,7 @@ TextTheme buildTextTheme() {
       letterSpacing: 0,
     ),
 
-    // ── Title ─────────────────────────────────────────────────────────────────
+    // ── Title ───────────────────────────────────────────────────────────────
     // Use for component-level titles and prominent labels inside cards,
     // lists, or dialogs. More emphasis than body, less than headline.
 
@@ -95,7 +95,7 @@ TextTheme buildTextTheme() {
       letterSpacing: 0.1,
     ),
 
-    // ── Body ──────────────────────────────────────────────────────────────────
+    // ── Body ────────────────────────────────────────────────────────────────
     // Use for reading/content text. Optimised for legibility at comfortable
     // reading sizes. Default for paragraphs and descriptions.
 
@@ -126,7 +126,7 @@ TextTheme buildTextTheme() {
       letterSpacing: 0.4,
     ),
 
-    // ── Label ─────────────────────────────────────────────────────────────────
+    // ── Label ───────────────────────────────────────────────────────────────
     // Use for UI control labels, buttons, and navigation items.
     // NOT for body copy — these are designed to label interactive elements.
 

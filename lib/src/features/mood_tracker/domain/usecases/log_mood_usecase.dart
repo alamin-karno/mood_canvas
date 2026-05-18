@@ -1,7 +1,6 @@
+import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_entry.dart';
+import 'package:mood_canvas/src/features/mood_tracker/domain/repositories/mood_tracker_repository.dart';
 import 'package:mood_canvas/src/utils/typedefs.dart';
-
-import '../entities/mood_entry.dart';
-import '../repositories/mood_tracker_repository.dart';
 
 class LogMoodUseCase {
   const LogMoodUseCase(this._repository);

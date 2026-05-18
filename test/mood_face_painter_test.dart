@@ -31,8 +31,7 @@ void main() {
     final canvas = Canvas(recorder);
 
     for (final mood in MoodType.values) {
-      final painter = MoodFacePainter(moodType: mood);
-      painter.paint(canvas, size);
+      MoodFacePainter(moodType: mood).paint(canvas, size);
     }
 
     recorder.endRecording();
