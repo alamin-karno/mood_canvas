@@ -2,7 +2,7 @@
 
 A single-screen Flutter web mood tracker. Tap a custom-drawn face to log how you feel, browse your last seven entries in a horizontal timeline, and tap any past entry for a brief animation.
 
-**Live demo:** https://mood-canvas.web.app (update after deploy)
+**Live demo:** https://mood-canvas-demo-c6949.web.app
 
 **Repository:** https://github.com/alamin-karno/mood_canvas
 
