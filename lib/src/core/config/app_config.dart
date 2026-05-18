@@ -1,4 +1,4 @@
-import 'package:mood_canvas/src/services/storage_service.dart';
+import 'package:mood_canvas/src/core/services/storage_service.dart';
 
 class AppConfig {
   AppConfig._();

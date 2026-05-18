@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:mood_canvas/src/core/theme/theme_constants.dart';
 import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_entry.dart';
 import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_type.dart';
 import 'package:mood_canvas/src/features/mood_tracker/presentation/widgets/mood_face_avatar.dart';
-import 'package:mood_canvas/src/theme/app_borders.dart';
-import 'package:mood_canvas/src/theme/app_curves.dart';
-import 'package:mood_canvas/src/theme/app_durations.dart';
-import 'package:mood_canvas/src/theme/app_spacing.dart';
 
 class MoodTimelineTile extends StatelessWidget {
   const MoodTimelineTile({

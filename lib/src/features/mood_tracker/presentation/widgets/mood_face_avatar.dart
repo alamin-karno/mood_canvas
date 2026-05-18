@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mood_canvas/src/core/theme/theme_constants.dart';
 import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_type.dart';
 import 'package:mood_canvas/src/features/mood_tracker/presentation/painters/mood_face_painter.dart';
-import 'package:mood_canvas/src/theme/app_curves.dart';
-import 'package:mood_canvas/src/theme/app_durations.dart';
 
 class MoodFaceAvatar extends StatelessWidget {
   const MoodFaceAvatar({

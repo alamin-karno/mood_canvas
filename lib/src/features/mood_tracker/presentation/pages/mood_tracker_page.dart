@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mood_canvas/src/core/theme/theme_constants.dart';
 import 'package:mood_canvas/src/features/mood_tracker/domain/entities/mood_type.dart';
 import 'package:mood_canvas/src/features/mood_tracker/presentation/bloc/mood_tracker_bloc.dart';
 import 'package:mood_canvas/src/features/mood_tracker/presentation/bloc/mood_tracker_event.dart';
 import 'package:mood_canvas/src/features/mood_tracker/presentation/bloc/mood_tracker_state.dart';
 import 'package:mood_canvas/src/features/mood_tracker/presentation/widgets/mood_face_avatar.dart';
 import 'package:mood_canvas/src/features/mood_tracker/presentation/widgets/mood_timeline_tile.dart';
-import 'package:mood_canvas/src/theme/app_curves.dart';
-import 'package:mood_canvas/src/theme/app_durations.dart';
-import 'package:mood_canvas/src/theme/app_spacing.dart';
 
 class MoodTrackerPage extends StatefulWidget {
   const MoodTrackerPage({super.key});

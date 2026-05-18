@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mood_canvas/src/theme/color_schemes.dart';
-import 'package:mood_canvas/src/theme/text_theme.dart';
+import 'package:mood_canvas/src/core/theme/theme_constants.dart';
 
 Color _colorFromHex(String hex) {
   final cleaned = hex.replaceFirst('#', '');
