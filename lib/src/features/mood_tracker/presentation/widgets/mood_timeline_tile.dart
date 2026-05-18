@@ -6,6 +6,7 @@ import '../../../../theme/app_curves.dart';
 import '../../../../theme/app_durations.dart';
 import '../../../../theme/app_spacing.dart';
 import '../../domain/entities/mood_entry.dart';
+import '../../domain/entities/mood_type.dart';
 import 'mood_face_avatar.dart';
 
 class MoodTimelineTile extends StatelessWidget {
