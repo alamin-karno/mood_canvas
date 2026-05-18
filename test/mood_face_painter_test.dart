@@ -42,4 +42,15 @@ void main() {
     final colors = MoodType.values.map((m) => m.accentColor).toSet();
     expect(colors.length, MoodType.values.length);
   });
+
+  test('buildTearPath produces a closed droplet shape', () {
+    final path = MoodFacePainter.buildTearPath(const Offset(10, 10), 8);
+    expect(path.getBounds().height, greaterThan(0));
+    expect(path.contains(const Offset(10, 14)), isTrue);
+  });
+
+  test('buildCheekPath produces an oval blush region', () {
+    final path = MoodFacePainter.buildCheekPath(const Offset(40, 40), 20);
+    expect(path.getBounds().width, greaterThan(path.getBounds().height * 0.5));
+  });
 }
