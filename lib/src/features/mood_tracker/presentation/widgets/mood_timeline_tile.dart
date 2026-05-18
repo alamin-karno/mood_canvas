@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../../../theme/app_borders.dart';
 import '../../../../theme/app_curves.dart';
 import '../../../../theme/app_durations.dart';
+import '../../../../theme/app_spacing.dart';
 import '../../domain/entities/mood_entry.dart';
 import 'mood_face_avatar.dart';
 
@@ -33,10 +35,10 @@ class MoodTimelineTile extends StatelessWidget {
           duration: AppDurations.quick,
           curve: AppCurves.spring,
           width: 88,
-          padding: const EdgeInsets.all(12),
+          padding: const EdgeInsets.all(AppSpacing.ms),
           decoration: BoxDecoration(
             color: Theme.of(context).colorScheme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: AppBorders.card,
             border: Border(
               left: BorderSide(
                 color: accent,
@@ -65,13 +67,13 @@ class MoodTimelineTile extends StatelessWidget {
                     ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 8),
+              const SizedBox(height: AppSpacing.sm),
               MoodFaceAvatar(
                 moodType: entry.moodType,
                 size: 48,
                 selected: animating,
               ),
-              const SizedBox(height: 6),
+              const SizedBox(height: AppSpacing.xs),
               AnimatedContainer(
                 duration: AppDurations.quick,
                 curve: AppCurves.standard,

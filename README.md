@@ -1,4 +1,4 @@
-# mood_canvas
+# Mood Canvas
 
 A single-screen Flutter web mood tracker. Tap a custom-drawn face to log how you feel, browse your last seven entries in a horizontal timeline, and tap any past entry for a brief animation.
 
@@ -8,10 +8,10 @@ A single-screen Flutter web mood tracker. Tap a custom-drawn face to log how you
 
 ## Features
 
-- Three moods (happy, neutral, sad) drawn with `CustomPainter` (`drawCircle`, `drawArc`, `drawPath`)
-- Tap a face to log immediately
+- Three moods (happy, neutral, sad) drawn with `CustomPainter` using `drawCircle`, `drawArc`, and `drawPath`
+- Tap a face to log immediately with selection feedback and a success snackbar
 - Horizontal timeline of the 7 most recent entries (date, face, mood color accent)
-- Tap a timeline entry to pulse it briefly
+- Tap a timeline entry to pulse it briefly with scale and accent glow
 - Local persistence via `shared_preferences` (no backend required)
 
 ## Getting started
@@ -65,4 +65,4 @@ lib/
 
 ## Architecture
 
-Feature-first clean architecture: domain → data → presentation, with BLoC and `get_it` for dependency injection.
+Feature-first clean architecture: **domain** (entities, repository contracts, use cases) → **data** (local datasource, repository implementation) → **presentation** (BLoC, page, widgets, `CustomPainter`). Dependency injection via `get_it`. The BLoC subscribes to a history stream from local storage so the UI always reflects persisted entries.

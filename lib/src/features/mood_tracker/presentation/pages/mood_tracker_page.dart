@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../theme/app_curves.dart';
 import '../../../../theme/app_durations.dart';
+import '../../../../theme/app_spacing.dart';
 import '../../domain/entities/mood_type.dart';
 import '../bloc/mood_tracker_bloc.dart';
 import '../bloc/mood_tracker_event.dart';
@@ -76,7 +77,7 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
                       constraints.maxWidth < 600 ? 72.0 : 88.0;
 
                   return Padding(
-                    padding: const EdgeInsets.all(24),
+                    padding: const EdgeInsets.all(AppSpacing.lg),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
@@ -85,11 +86,11 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
                           style: Theme.of(context).textTheme.titleLarge,
                           textAlign: TextAlign.center,
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: AppSpacing.lg),
                         Wrap(
                           alignment: WrapAlignment.center,
-                          spacing: 16,
-                          runSpacing: 16,
+                          spacing: AppSpacing.md,
+                          runSpacing: AppSpacing.md,
                           children: MoodType.values.map((type) {
                             final logging = state.isLoading;
                             final selected = highlightPicker &&
@@ -108,7 +109,7 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
                                     size: faceSize,
                                     selected: selected,
                                   ),
-                                  const SizedBox(height: 4),
+                                  const SizedBox(height: AppSpacing.xs),
                                   AnimatedDefaultTextStyle(
                                     duration: AppDurations.quick,
                                     curve: AppCurves.standard,
@@ -130,12 +131,12 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
                             );
                           }).toList(),
                         ),
-                        const SizedBox(height: 32),
+                        const SizedBox(height: AppSpacing.xl),
                         Text(
                           'Recent moods',
                           style: Theme.of(context).textTheme.titleSmall,
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: AppSpacing.ms),
                         Expanded(
                           child: recent.isEmpty
                               ? Center(
@@ -155,7 +156,7 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
                                   scrollDirection: Axis.horizontal,
                                   itemCount: recent.length,
                                   separatorBuilder: (_, __) =>
-                                      const SizedBox(width: 12),
+                                      const SizedBox(width: AppSpacing.ms),
                                   itemBuilder: (context, index) {
                                     final entry = recent[index];
                                     return MoodTimelineTile(

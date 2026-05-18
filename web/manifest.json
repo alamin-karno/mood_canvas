@@ -1,11 +1,11 @@
 {
-    "name": "mood_canvas",
-    "short_name": "mood_canvas",
+    "name": "Mood Canvas",
+    "short_name": "Mood Canvas",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#6366F1",
+    "theme_color": "#6366F1",
+    "description": "A single-screen mood tracker with custom-drawn faces and a seven-entry timeline.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
