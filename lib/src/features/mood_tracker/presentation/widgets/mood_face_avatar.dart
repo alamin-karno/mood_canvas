@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../theme/app_curves.dart';
+import '../../../../theme/app_durations.dart';
 import '../../domain/entities/mood_type.dart';
 import '../painters/mood_face_painter.dart';
 
@@ -18,9 +20,9 @@ class MoodFaceAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedScale(
-      scale: selected ? 1.08 : 1,
-      duration: const Duration(milliseconds: 200),
-      curve: Curves.easeOut,
+      scale: selected ? 1.1 : 1,
+      duration: AppDurations.quick,
+      curve: AppCurves.microInteraction,
       child: CustomPaint(
         size: Size.square(size),
         painter: MoodFacePainter(
