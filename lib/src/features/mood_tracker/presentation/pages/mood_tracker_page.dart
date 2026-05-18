@@ -148,17 +148,37 @@ class _MoodTrackerPageState extends State<MoodTrackerPage> {
                                         ),
                                   ),
                                 )
-                              : ListView.separated(
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: recent.length,
-                                  separatorBuilder: (_, __) =>
-                                      const SizedBox(width: AppSpacing.ms),
-                                  itemBuilder: (context, index) {
-                                    final entry = recent[index];
-                                    return MoodTimelineTile(
-                                      entry: entry,
-                                      animating: _animatingEntryId == entry.id,
-                                      onTap: () => _onTimelineTap(entry.id),
+                              : LayoutBuilder(
+                                  builder: (context, timelineConstraints) {
+                                    final count = recent.length;
+                                    const gap = AppSpacing.ms;
+                                    final totalGap =
+                                        gap * (count > 1 ? count - 1 : 0);
+                                    final tileWidth =
+                                        (timelineConstraints.maxWidth -
+                                                totalGap) /
+                                            count;
+
+                                    return ListView.separated(
+                                      scrollDirection: Axis.horizontal,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      itemCount: count,
+                                      separatorBuilder: (_, __) =>
+                                          const SizedBox(width: gap),
+                                      itemBuilder: (context, index) {
+                                        final entry = recent[index];
+                                        return SizedBox(
+                                          width: tileWidth,
+                                          child: MoodTimelineTile(
+                                            entry: entry,
+                                            animating:
+                                                _animatingEntryId == entry.id,
+                                            onTap: () =>
+                                                _onTimelineTap(entry.id),
+                                          ),
+                                        );
+                                      },
                                     );
                                   },
                                 ),
