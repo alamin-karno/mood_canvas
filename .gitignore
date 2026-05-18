@@ -46,4 +46,12 @@ app.*.map.json
 
 # Local config
 .env
+.env.*
+!.env.example
 .firebaserc
+
+# Firebase CLI
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
+ui-debug.log

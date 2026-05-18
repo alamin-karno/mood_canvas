@@ -8,6 +8,8 @@
 include: package:very_good_analysis/analysis_options.yaml
 
 analyzer:
+  rules:
+    public_member_api_docs: false
   errors:
     inference_failure_on_untyped_parameter: ignore
   exclude:
